@@ -1,0 +1,82 @@
+---
+# Suricata Configuration File
+
+# Global Configuration
+vars:
+  address-groups:
+    HOME_NET: "[192.168.0.0/16,10.0.0.0/8,172.16.0.0/12]"
+    EXTERNAL_NET: "!$HOME_NET"
+
+# Logging Configuration
+logging:
+  default-log-level: notice
+  default-output-filter: fast
+  outputs:
+    - fast:
+        enabled: yes
+        filename: fast.log
+        append: yes
+        level: alert
+
+    - eve-log:
+        enabled: yes
+        filetype: regular
+        filename: eve.json
+        types:
+          - alert
+          - http:
+              extended: yes
+          - tls:
+              extended: yes
+          - dns
+          - files:
+              force-magic: yes
+              force-md5: yes
+              force-sha1: yes
+              force-sha256: yes
+
+# Network Configuration
+af-packet:
+  - interface: eth0
+    cluster-type: cluster_flow
+
+# Rule Configuration
+default-rule-path: /etc/suricata/rules
+rule-files:
+  - suricata.rules
+
+# Flow Configuration
+defrag:
+  memcap: 32gb
+  timeout: 60
+
+stream:
+  memcap: 16gb
+  checksum-validation: no
+
+# Performance Configuration
+threading:
+  set-cpu-affinity: yes
+  cpu-affinity:
+
+# Inspection Configuration
+inspection-reload-rules: yes
+
+# File Extraction Configuration
+file-store:
+  enabled: yes
+  force-magic: yes
+
+# Protocol Configuration
+http:
+  request-body-limit: 100kb
+  response-body-limit: 100kb
+  http2:
+    enabled: yes
+
+dns:
+  enabled: yes
+  request-log:
+    enabled: yes
+    dir: /var/log/suricata/
+    suffix: "-dns.log"
