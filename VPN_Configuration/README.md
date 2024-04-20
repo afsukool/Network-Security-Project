@@ -1,10 +1,8 @@
 Configuration Instructions:
 
-    Replace your_server_ip in client.ovpn with the public IP address or domain name of your OpenVPN server.
-    Ensure that the ca.crt, server.crt, server.key, and dh.pem files are present in the server's directory.
-    Create a directory named ccd in the OpenVPN server's configuration directory (/etc/openvpn/ccd) and add client-specific configuration files with the following content:
-
-    perl
+Replace your_server_ip in client.ovpn with the public IP address or domain name of your OpenVPN server.
+Ensure that the ca.crt, server.crt, server.key, and dh.pem files are present in the server's directory.
+Create a directory named ccd in the OpenVPN server's configuration directory (/etc/openvpn/ccd) and add client-specific configuration files with the following content:
 
 ifconfig-push 10.8.0.2 255.255.255.0
 
