@@ -1,0 +1,11 @@
+# Sample Outbound Firewall Rules
+# These rules control outgoing traffic from the network
+
+# Allow DNS queries from any source to DNS servers
+ALLOW UDP FROM ANY TO DNS_SERVERS PORT 53
+
+# Allow SMTP traffic from internal mail server to external mail servers
+ALLOW TCP FROM MailServer_IP TO External_MailServers_IP RANGE 25
+
+# Deny all other outbound traffic by default
+DENY ALL FROM ANY TO ANY
