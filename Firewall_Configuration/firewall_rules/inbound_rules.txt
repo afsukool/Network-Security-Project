@@ -1,0 +1,11 @@
+# Sample Inbound Firewall Rules
+# These rules control incoming traffic to the network
+
+# Allow HTTP traffic from any source to the web server
+ALLOW TCP FROM ANY TO WebServer_IP PORT 80
+
+# Allow HTTPS traffic from specific source IP range to the secure web server
+ALLOW TCP FROM Trusted_Network_IP_RANGE TO Secure_WebServer_IP PORT 443
+
+# Deny all other inbound traffic by default
+DENY ALL FROM ANY TO ANY
